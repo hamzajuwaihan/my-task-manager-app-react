@@ -13,7 +13,7 @@ const taskSlice = createSlice({
                 id: uuidv4(),
                 ...action.payload
             }
-            state.tasks.push(newTask);
+            state.push(newTask);
         }
     }
 })
