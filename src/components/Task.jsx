@@ -1,20 +1,25 @@
-import { Typography } from "@mui/material";
+import { Typography, Container } from "@mui/material";
 import PropTypes from "prop-types";
+import ConfirmationModalContainer from "../containers/ConfirmationModalContainer";
 
 const Task = ({task})=>{
 
     return (
-        <>
-            <Typography>{task.taskInfo}</Typography>
-        </>
+        <Container>
+
+            <Typography>{task.title}</Typography>
+            <ConfirmationModalContainer taskId={task.id}/>
+            
+        </Container>
     )
 }
 
 Task.propTypes = {
     task: PropTypes.shape({
-      taskInfo: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired
-    }).isRequired,
+      title: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+     
+    }).isRequired
   };
 
 export default Task;
