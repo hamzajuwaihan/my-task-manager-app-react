@@ -1,4 +1,4 @@
-import {Box, Button, Typography, Modal}from "@mui/material";
+import { Button, Typography, Modal, Stack}from "@mui/material";
 import PropTypes from "prop-types";
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -17,19 +17,15 @@ const style = {
 };
 
 
-// onClick={()=>{
-//     OnClick(taskId)
-//   }}
-
 const ConfirmationModalPresentation = ({ openHandler, closeHandler, status, deleteTaskHandler, taskId}) => {
     return (
         <div>
             <Button 
-            variant="text"
+            variant="outlined"
             onClick={openHandler}
-            sx={{ bgcolor: "black", "&:hover": { bgcolor: "black" } }}
-                >
-            <DeleteIcon />
+            color="error"
+            endIcon={<DeleteIcon />}>
+            Delete
             </Button>
             <Modal
                 open={status}
@@ -37,19 +33,21 @@ const ConfirmationModalPresentation = ({ openHandler, closeHandler, status, dele
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Stack sx={style} spacing={2} direction="column" >
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         Are you sure you want to delete the task?
                     </Typography>
-                    <Button onClick={closeHandler}>
+                    <Stack direction="row" spacing={2}>
+                    <Button onClick={closeHandler} variant="outlined">
                         Cancel
                     </Button>
                     <Button onClick={()=>{
                         deleteTaskHandler(taskId);
-                    }} >
+                    }} color="error" variant="contained">
                         Yes !
                     </Button>
-                </Box>
+                    </Stack>
+                </Stack>
             </Modal>
         </div>
     );

@@ -1,16 +1,16 @@
-import { Typography, Container } from "@mui/material";
+import { Typography, Stack } from "@mui/material";
 import PropTypes from "prop-types";
 import ConfirmationModalContainer from "../containers/ConfirmationModalContainer";
 
 const Task = ({task})=>{
 
     return (
-        <Container>
+        <Stack direction={"row"} spacing={2} alignItems="center">
 
-            <Typography>{task.title}</Typography>
+            <Typography variant="h6" gutterBottom>{task.title}</Typography>
             <ConfirmationModalContainer taskId={task.id}/>
             
-        </Container>
+        </Stack>
     )
 }
 

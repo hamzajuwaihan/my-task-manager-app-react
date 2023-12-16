@@ -22,7 +22,7 @@ const ConfirmationModalContainer = ({taskId})=>{
 }
 
 ConfirmationModalContainer.propTypes = {
-    OnClick: PropTypes.func.isRequired,
+    
     taskId: PropTypes.string.isRequired
 }
 

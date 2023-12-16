@@ -3,6 +3,9 @@ import AddTaskFormPresentation from "../components/AddTaskFormPresentation";
 import { addTask } from "../features/taskSlice";
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from "react-redux";
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+
 
 const AddTaskFormContainer = ()=>{
 
@@ -27,7 +30,7 @@ const AddTaskFormContainer = ()=>{
             }
         })
     }
-
+    const [snackBarStatus, setSnackBarStatus] = useState(false);
     const handleSubmit = (e)=>{
         e.preventDefault();
         dispatch(
@@ -44,11 +47,25 @@ const AddTaskFormContainer = ()=>{
             type:"",
             status:""
         })
+        setSnackBarStatus(true);
     }
-
+    const [dueDate, setDueDate] = useState(new Date());
+   
+    const handleDateChange = (newDate) => {
+        setDueDate(newDate);
+        setFormInputs((prevState)=>{
+            return {
+                ...prevState,
+                dueDate: newDate
+            }
+        
+    });
+    };
     return (
         <>
-        <AddTaskFormPresentation onChange= {handleChange} formData={formInputs} onSubmit={handleSubmit}/>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <AddTaskFormPresentation onChange= {handleChange} formData={formInputs} onSubmit={handleSubmit} dueDate={dueDate} onDateChange={handleDateChange} snackBarStatus={snackBarStatus} snackBarStatusHandler={setSnackBarStatus}/>
+        </LocalizationProvider>
         </>
     )
 

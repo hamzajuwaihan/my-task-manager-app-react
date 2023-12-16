@@ -1,95 +1,178 @@
-import { Box } from "@mui/material";
+import {
+  Box,
+  FormLabel,
+  Button,
+  TextField,
+  MenuItem,
+  FormControl,
+  FormControlLabel,
+  RadioGroup,
+  Radio,
+  Typography,
+  Snackbar,
+  Alert,
+} from "@mui/material";
+import { MobileDateTimePicker } from "@mui/x-date-pickers";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import PropTypes from "prop-types";
 
-const AddTaskFormPresentation = ({ onChange, formData, onSubmit }) => {
+const AddTaskFormPresentation = ({
+  onChange,
+  formData,
+  onSubmit,
+  dueDate,
+  onDateChange,
+  snackBarStatus,
+  snackBarStatusHandler,
+}) => {
   return (
-    <Box m={5}>
+    <Box
+      m={5}
+      sx={{
+        width: {
+          xs: "80%",
+          sm: "50%",
+        },
+        margin: "auto",
+      }}
+    >
+      <Typography variant="h4" component="h2" gutterBottom align="center">
+        Add a new task
+      </Typography>
       <form onSubmit={onSubmit}>
-        <label htmlFor="title">
-          Title:
-          <br />
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={onChange}
-            required
-          />
-        </label>
+        <TextField
+          margin="normal"
+          label="Title"
+          type="text"
+          name="title"
+          value={formData.title}
+          onChange={onChange}
+          id="title"
+          required
+          color="primary"
+          size="small"
+          fullWidth
+        />
         <br />
-        <label htmlFor="description">
-          Description:
-          <br />
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={onChange}
-          ></textarea>
-        </label>
+
+        <TextField
+          label="Description"
+          name="description"
+          value={formData.description}
+          onChange={onChange}
+          id="description"
+          fullWidth
+          margin="normal"
+          multiline
+        />
         <br />
-        <label htmlFor="dueDate">
-          Due Date:
-          <br />
-          <input
-            type="date"
-            name="dueDate"
-            value={formData.dueDate}
-            onChange={onChange}
-            required
-          />
-        </label>
+
+        <MobileDateTimePicker
+          label="Due Date *"
+          name="dueDate"
+          value={dueDate}
+          onChange={onDateChange}
+          sx={{
+            width: "100%",
+            marginTop: 1,
+            marginBottom: 1,
+          }}
+        />
         <br />
-        <label htmlFor="priority">
-          Priority:
-          <br />
-          <select
-            name="priority"
+        <br />
+        <FormControl m={2} fullWidth>
+          <FormLabel id="priority-group-label">Priority</FormLabel>
+          <RadioGroup
             value={formData.priority}
             onChange={onChange}
-            required
+            row
+            name="priority"
+            aria-labelledby="priority-group-label"
           >
-            <option value="">Select Priority</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-          </select>
-        </label>
+            <FormControlLabel control={<Radio />} label="High" value={"high"} />
+            <FormControlLabel
+              control={<Radio />}
+              value={"medium"}
+              label="Medium"
+            />
+            <FormControlLabel control={<Radio />} value={"low"} label="Low" />
+          </RadioGroup>
+        </FormControl>
         <br />
-        <label htmlFor="category">
-          Category:
-          <br />
-          <input
-            type="text"
-            name="category"
-            value={formData.category}
-            onChange={onChange}
-          />
-        </label>
+        <TextField
+          label="Category"
+          id="category"
+          type="text"
+          name="category"
+          value={formData.category}
+          onChange={onChange}
+          margin="normal"
+          color="primary"
+          fullWidth
+          size="small"
+        />
+
         <br />
-        <label htmlFor="type">
-          Type:
-          <br />
-          <input
-            type="text"
-            name="type"
-            value={formData.type}
-            onChange={onChange}
-          />
-        </label>
+        <TextField
+          margin="normal"
+          label="Type"
+          id="type"
+          type="text"
+          name="type"
+          value={formData.type}
+          onChange={onChange}
+          color="primary"
+          size="small"
+          fullWidth
+        />
         <br />
-        <label htmlFor="status">
-          Status:
-          <br />
-          <select name="status" value={formData.status} onChange={onChange} required>
-            <option value="">Select Status</option>
-            <option value="todo">To-Do</option>
-            <option value="inProgress">In Progress</option>
-            <option value="done">Done</option>
-          </select>
-        </label>
+        <TextField
+          select
+          name="status"
+          value={formData.status}
+          onChange={onChange}
+          id="status"
+          required
+          fullWidth
+          size="small"
+          margin="normal"
+          label="Status"
+        >
+          <MenuItem value="">Select Status</MenuItem>
+          <MenuItem value="todo">To-Do</MenuItem>
+          <MenuItem value="inProgress">In Progress</MenuItem>
+          <MenuItem value="done">Done</MenuItem>
+        </TextField>
         <br />
-        <button type="submit">Submit</button>
+
+        <Button variant="contained" type="submit" fullWidth>
+          Submit
+        </Button>
       </form>
+      <Snackbar
+        open={snackBarStatus}
+        autoHideDuration={6000}
+        onClose={() => {
+          snackBarStatusHandler(false);
+        }}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+      >
+        <Alert
+          onClose={() => {
+            snackBarStatusHandler(false);
+          }}
+          severity="success"
+          sx={{ width: "100%" }}
+          startIcon={
+            <CheckCircleOutlineIcon fontSize="inherit" color="success" />
+          }
+        >
+          Task was added successfully !
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
@@ -98,6 +181,8 @@ AddTaskFormPresentation.propTypes = {
   onChange: PropTypes.func.isRequired,
   formData: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  dueDate: PropTypes.object.isRequired,
+  onDateChange: PropTypes.func.isRequired,
 };
 
 export default AddTaskFormPresentation;
