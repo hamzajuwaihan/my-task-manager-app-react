@@ -1,0 +1,54 @@
+{
+  "tasks": [
+    {
+      "id": "7a53c23e-499d-4a20-88e0-420396496026",
+      "title": "Review Marketing Campaign Ideas",
+      "description": "Analyze proposals from different agencies and choose the best one.",
+      "dueDate": "2023-12-22 15:00:00",
+      "priority": "high",
+      "category": "Marketing",
+      "type": "Meeting",
+      "status": "todo"
+    },
+    {
+      "id": "9287e64d-564c-4980-81b1-17c024314945",
+      "title": "Finish Project Milestone",
+      "description": "Complete all tasks outlined in the project plan for Phase 1.",
+      "dueDate": "2023-12-28 09:00:00",
+      "priority": "medium",
+      "category": "Development",
+      "type": "Coding",
+      "status": "in progress"
+    },
+    {
+      "id": "03d1f568-20e4-4a29-8321-66b045296e1b",
+      "title": "Pay Invoices",
+      "description": "Process and pay outstanding bills for December.",
+      "dueDate": "2023-12-30 17:00:00",
+      "priority": "low",
+      "category": "Finance",
+      "type": "Administrative",
+      "status": "todo"
+    },
+    {
+      "id": "1e2a41bc-37b2-4a3b-a99e-7974968e38b5",
+      "title": "Schedule Client Meeting",
+      "description": "Follow up with Mr. Smith to arrange a meeting next week.",
+      "dueDate": "2023-12-20 11:00:00",
+      "priority": "medium",
+      "category": "Sales",
+      "type": "Communication",
+      "status": "todo"
+    },
+    {
+      "id": "5c02f894-e229-404a-a225-a049213b5a8f",
+      "title": "Update Website Content",
+      "description": "Revise product descriptions and upload new images.",
+      "dueDate": "2024-01-05 10:00:00",
+      "priority": "high",
+      "category": "Marketing",
+      "type": "Content Management",
+      "status": "in progress"
+    }
+  ]
+}

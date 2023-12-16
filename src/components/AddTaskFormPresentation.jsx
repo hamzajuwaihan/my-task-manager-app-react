@@ -25,6 +25,7 @@ const AddTaskFormPresentation = ({
   snackBarStatus,
   snackBarStatusHandler,
 }) => {
+
   return (
     <Box
       m={5}
@@ -166,7 +167,7 @@ const AddTaskFormPresentation = ({
           }}
           severity="success"
           sx={{ width: "100%" }}
-          startIcon={
+          icon={
             <CheckCircleOutlineIcon fontSize="inherit" color="success" />
           }
         >
@@ -183,6 +184,8 @@ AddTaskFormPresentation.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   dueDate: PropTypes.object.isRequired,
   onDateChange: PropTypes.func.isRequired,
+  snackBarStatus: PropTypes.bool.isRequired,
+  snackBarStatusHandler: PropTypes.func.isRequired,
 };
 
 export default AddTaskFormPresentation;

@@ -10,12 +10,12 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 const AddTaskFormContainer = ()=>{
 
     const dispatch = useDispatch();
-
+    const [dueDate, setDueDate] = useState(new Date());
     const [formInputs, setFormInputs] = useState({
         title: "",
         id: uuidv4(),
         description: "",
-        dueDate: "",
+        dueDate: dueDate,
         priority:"",
         category:"",
         type:"",
@@ -33,15 +33,18 @@ const AddTaskFormContainer = ()=>{
     const [snackBarStatus, setSnackBarStatus] = useState(false);
     const handleSubmit = (e)=>{
         e.preventDefault();
+        const date = new Date(formInputs.dueDate);
         dispatch(
         addTask({
             ...formInputs,
+            dueDate: date.toISOString(),
             id: uuidv4()
        }))
+       const defaultDueDate = new Date();
         setFormInputs({
             title: "",
             description: "",
-            dueDate: "",
+            dueDate: defaultDueDate.toISOString(),
             priority:"",
             category:"",
             type:"",
@@ -49,17 +52,19 @@ const AddTaskFormContainer = ()=>{
         })
         setSnackBarStatus(true);
     }
-    const [dueDate, setDueDate] = useState(new Date());
+ 
    
     const handleDateChange = (newDate) => {
-        setDueDate(newDate);
+        const date = new Date(newDate);
+        setDueDate(date);
         setFormInputs((prevState)=>{
             return {
                 ...prevState,
-                dueDate: newDate
+                dueDate: date.toISOString()
             }
         
-    });
+    })
+    
     };
     return (
         <>
